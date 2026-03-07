@@ -25,12 +25,78 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link
+      rel="shortcut icon"
+      href="./assets/github-logo.png"
+      type="image/x-icon"
+    />
     <!-- Custom css init -->
     <link rel="stylesheet" href="./style.css" />
-    <title>Document</title>
+    <title>GitHub Issues Login</title>
   </head>
   <body>
-    <h1 class="text-2xl bg-red-900">Hellow</h1>
-    <script src="./app.js"></script>
+    <div class="logo-uper">
+      <img src="./assets/github-logo.png" alt="" />
+      <h2>GitHub Issues Tracker</h2>
+      <p>Sign in to manager your issues</p>
+    </div>
+    <div>
+      <fieldset
+        class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
+      >
+        <label class="label">Username</label>
+        <input
+          id="user_Id"
+          type="email"
+          value=""
+          class="input"
+          maxlength="6"
+          placeholder="Enter Username"
+        />
+        <label for="Username">Defalut:adimn</label>
+
+        <label class="label">Password</label>
+        <input
+          id="user_password"
+          type="password"
+          value=""
+          class="input"
+          maxlength="9"
+          placeholder="Enter Password"
+        />
+        <label for="password">Defalut:adimn123</label>
+        <label class="flex items-center gap-2 mt-2 cursor-pointer">
+          <input
+            type="checkbox"
+            id="remember-me"
+            class="checkbox checkbox-xs"
+          />
+          <span class="label-text">Remember me</span>
+        </label>
+
+        <button id="login-btn" class="btn btn-neutral mt-4">Sign In</button>
+      </fieldset>
+    </div>
+    <span>or</span>
+    <div class="credentials">
+      <label for="Demo Credentials">Demo Credentials:</label>
+
+      <h2>Username: admin</h2>
+      <p>Password: admin123</p>
+    </div>
+    <dialog id="my_modal_3" class="modal">
+      <div class="modal-box">
+        <form method="dialog">
+          <button
+            class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          >
+            ✕
+          </button>
+        </form>
+        <h3 class="text-lg font-bold">Congratulations!</h3>
+        <p class="py-4">Login Sucess</p>
+      </div>
+    </dialog>
+    <script src="./app.js" defer></script>
   </body>
 </html>
