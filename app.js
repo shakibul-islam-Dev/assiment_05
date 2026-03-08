@@ -54,8 +54,6 @@ if (signUp) {
 const setTotal = () => {
   let count = cards.children.length
   issueCount.innerText = count
-  // openCount.innerText = openIssues.length
-  // closeddCount.innerText = closeddIssues.length
 }
 
 // Button Toggles
@@ -94,9 +92,6 @@ const allLoadData = () => {
 }
 allLoadData()
 //all tab dispaly data
-
-const openIssues = []
-const closedIssues = []
 
 const labelsItem = (array) => {
   return array
@@ -157,8 +152,8 @@ const displaydata = (data) => {
     let card = document.createElement('div')
     card.innerHTML = `
      <div
-          id="card"
-          class="rounded-2xl border-t-6 h-full  ${borderColor} p-4 space-y-3 shadow-lg"
+          id="card" onclick = "showDetails(${ele.id})"
+          class="rounded-2xl cursor-pointer border-t-6 h-full  ${borderColor} p-4 space-y-3 shadow-lg"
         >
           <div class="flex items-center justify-between">
           <span class="${ele.status === 'open' ? 'text-green-500' : 'text-purple-500'} cursor-pointer">
@@ -187,9 +182,111 @@ const displaydata = (data) => {
           </div>
         </div>
     `
-
     cards.appendChild(card)
     // console.log(ele)
   })
+
   setTotal()
+}
+
+const showDetails = async (id) => {
+  const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`
+  const response = await fetch(url)
+  const details = await response.json()
+
+  modalDetails(details.data)
+}
+const modalDetails = (data) => {
+  const priority = data.priority.toLowerCase()
+  let priorityItem = ''
+  if (data.priority === 'high') {
+    priorityItem = 'bg-red-200 text-red-500'
+  } else if (data.priority === 'medium') {
+    priorityItem = 'bg-yellow-100 text-yellow-500'
+  } else if (data.priority === 'low') {
+    priorityItem = 'bg-gray-200 text-gray-500'
+  }
+  const labelsHtml = labelsItem(data.labels)
+  const date = new Date(data.createdAt)
+  const formatdDate = date.toDateString()
+
+  const showModalBox = document.getElementById('modal_container')
+  showModalBox.innerHTML = `
+  
+  <div
+        class="modal-box w-11/12 max-w-5xl p-0 cursor-pointer overflow-hidden rounded-3xl shadow-2xl"
+      >
+    
+        <div class="p-8 space-y-6">
+          <h1 id="modal_title" class="text-3xl font-extrabold text-[#111827]">
+            ${data.title}
+          </h1>
+
+          <div
+            class="flex items-center gap-3 text-sm font-medium text-gray-500"
+          >
+          
+            <span
+              id="modal_status"
+              class = "px-3 py-1 text-center rounded-full cursor-pointer ${data.status === 'open' ? 'bg-green-500 text-white' : 'bg-purple-500 text-white'}">
+              ${data.status}</span
+            >
+            <span class="text-gray-400">•</span>
+            <span
+              >Opened by
+              <span id="modal_author" class="font-semibold text-gray-700"
+                >${data.author}</span
+              ></span
+            >
+            <span class="text-gray-400">•</span>
+            <span id="modal_date">${formatdDate}</span>
+          </div>
+
+          <div id="modal_labels" class="flex items-center gap-2 pt-2">
+            <span
+              class="px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1"
+            >
+              ${labelsHtml}
+            </span>
+            
+          </div>
+
+          <div class="py-4 text-[#4B5563] text-base leading-relaxed">
+            <p id="modal_description">
+              ${data.description}
+            </p>
+          </div>
+
+          <div
+            class="bg-gray-50 rounded-xl p-6 grid grid-cols-1 md:grid-cols-2 gap-6 border border-gray-100"
+          >
+            <div class="space-y-2">
+              <h4 class="text-base font-semibold text-gray-700">Assignee:</h4>
+              <div id="modal_assignee" class="text-lg font-bold text-[#111827]">
+                ${data.assignee}
+              </div>
+            </div>
+            <div class="space-y-2">
+              <h4 class="text-base font-semibold text-gray-700">Priority:</h4>
+              <span
+                id="modal_priority"
+                class="px-4 py-1.5 bg-red-500 text-white rounded-full text-xs font-bold uppercase tracking-wider inline-block ${priorityItem}"
+                >${data.priority}</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white px-8 pb-8 pt-2 flex justify-end">
+          <form method="dialog">
+            <button
+              class="px-8 py-3 bg-[#5000F0] text-white rounded-xl font-semibold text-sm transition hover:bg-[#4100C8] cursor-pointer"
+            >
+              Close
+            </button>
+          </form>
+        </div>
+      </div>
+  `
+  document.getElementById('my_modal_5').showModal()
 }
