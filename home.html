@@ -35,6 +35,7 @@
     <title>GitHub Issues Tracker</title>
   </head>
   <body>
+     
     <nav class="mx-auto px-4 py-2 flex flex-col gap-4 sm:flex-row items-center justify-between">
       <div id="nav-menu" class="hidden">eeeeeeeeeeeeee</div>
       <div id="nav-start" class="flex items-center gap-4">
@@ -96,6 +97,14 @@
         </div>
       </div>
     </section>
+    <section class="mt-4 py-10 border-t-1 border-t-gray-200 container mx-auto p-4">
+  
+  <div class="flex justify-center mb-4">
+      <span id="spiner" class="loading loading-dots loading-xl hidden"></span>
+  </div>
+
+  <div id="cards" class="cards grid grid-cols-1 sm:grid-cols-4 gap-4"></div>
+</section>
     <!-- Cards Div -->
     <section
       class="mt-4 py-10 border-t-1 border-t-gray-200 container mx-auto p-4"
@@ -111,6 +120,7 @@
         class="grid grid-cols-1 sm:grid-cols-4 gap-4"
       ></div>
     </section>
+    <!-- Modal -->
     <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
       <div id="modal_container"></div>
     </dialog>

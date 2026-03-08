@@ -8,6 +8,8 @@ const all = document.getElementById('all')
 const open = document.getElementById('open')
 const closed = document.getElementById('closed')
 const filterContainer = document.getElementById('filter-container')
+const searchBtn = document.getElementById('search-btn')
+const searchInput = document.querySelector('#search-parent input')
 let currentStatus = 'all'
 
 if (signUp) {
@@ -51,6 +53,15 @@ if (signUp) {
 // Login form
 
 // Total Counts of issues
+const manageSpinner = (status) => {
+  const spinner = document.getElementById('spiner')
+  if (status) {
+    spinner.classList.remove('hidden')
+  } else {
+    spinner.classList.add('hidden')
+  }
+}
+
 const setTotal = () => {
   let count = cards.children.length
   issueCount.innerText = count
@@ -58,6 +69,7 @@ const setTotal = () => {
 
 // Button Toggles
 const toggle = (id) => {
+  manageSpinner(true)
   //toggle button classlist add
   all.classList.remove('bg-blue-700', 'text-white')
   all.classList.add('bg-white', 'text-[#64748B]')
@@ -70,24 +82,31 @@ const toggle = (id) => {
   currentStatus = id
   selectdBtn.classList.remove('bg-white', 'text-[#64748B]')
   selectdBtn.classList.add('bg-blue-700', 'text-white')
+
   const filteredData = allIssues.filter((issue) => {
     if (id === 'all') return true
-    console.log('Current ID:', id, 'Issue Status:', issue.status)
     return issue.status.toLowerCase() === id.toLowerCase()
   })
+
   displaydata(filteredData)
+  setTimeout(() => {
+    displaydata(filteredData)
+    manageSpinner(false)
+  }, 300)
 }
 setTotal()
 
 // sobar age kaj data ke fetch kora
 let allIssues = []
 const allLoadData = () => {
+  manageSpinner(true)
   let url = 'https://phi-lab-server.vercel.app/api/v1/lab/issues'
   fetch(url)
     .then((res) => res.json())
     .then((json) => {
       allIssues = json.data
       displaydata(allIssues)
+      manageSpinner(false)
     })
 }
 allLoadData()
@@ -183,7 +202,6 @@ const displaydata = (data) => {
         </div>
     `
     cards.appendChild(card)
-    // console.log(ele)
   })
 
   setTotal()
@@ -291,11 +309,9 @@ const modalDetails = (data) => {
   document.getElementById('my_modal_5').showModal()
 }
 
-const searchBtn = document.getElementById('search-btn')
-const searchInput = document.querySelector('#search-parent input')
-
 if (searchBtn) {
   searchBtn.addEventListener('click', () => {
+    manageSpinner(true)
     const searchText = searchInput.value
     const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`
 
@@ -304,6 +320,7 @@ if (searchBtn) {
       .then((json) => {
         allIssues = json.data
         displaydata(allIssues)
+        manageSpinner(false)
       })
   })
 }
