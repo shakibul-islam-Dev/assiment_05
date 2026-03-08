@@ -290,3 +290,34 @@ const modalDetails = (data) => {
   `
   document.getElementById('my_modal_5').showModal()
 }
+
+const searchBtn = document.getElementById('search-btn')
+const searchInput = document.querySelector('#search-parent input')
+
+if (searchBtn) {
+  searchBtn.addEventListener('click', () => {
+    const searchText = searchInput.value
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`
+
+    fetch(url)
+      .then((res) => res.json())
+      .then((json) => {
+        allIssues = json.data
+        displaydata(allIssues)
+      })
+  })
+}
+
+if (searchInput) {
+  searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      searchBtn.click()
+    }
+  })
+
+  searchInput.addEventListener('input', (e) => {
+    if (e.target.value === '') {
+      allLoadData()
+    }
+  })
+}

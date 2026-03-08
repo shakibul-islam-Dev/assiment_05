@@ -35,55 +35,84 @@
     <title>GitHub Issues Login</title>
   </head>
   <body>
-    <div class="logo-uper">
-      <img src="./assets/github-logo.png" alt="" />
-      <h2>GitHub Issues Tracker</h2>
-      <p>Sign in to manager your issues</p>
-    </div>
-    <div>
-      <fieldset
-        class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
-      >
-        <label class="label">Username</label>
-        <input
-          id="user_Id"
-          type="email"
-          value=""
-          class="input"
-          maxlength="6"
-          placeholder="Enter Username"
-        />
-        <label for="Username">Defalut:adimn</label>
-
-        <label class="label">Password</label>
-        <input
-          id="user_password"
-          type="password"
-          value=""
-          class="input"
-          maxlength="9"
-          placeholder="Enter Password"
-        />
-        <label for="password">Defalut:adimn123</label>
-        <label class="flex items-center gap-2 mt-2 cursor-pointer">
+    <main
+      class="flex items-center justify-center flex-col container mx-auto mt-20"
+    >
+      <div class="logo-uper text-center">
+        <img class="mx-auto" src="./assets/github-logo.png" alt="" />
+        <h2 class="text-4xl pt-4 font-bold text-[#1F2937]">
+          GitHub Issues Tracker
+        </h2>
+        <p class="text-xl font-normal text-gray-500">
+          Sign in to manager your issues
+        </p>
+      </div>
+      <div>
+        <fieldset
+          class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
+        >
+          <label class="label text-[16px] pt-4 font-medium text-[#1F2937]"
+            >Username</label
+          >
           <input
-            type="checkbox"
-            id="remember-me"
-            class="checkbox checkbox-xs"
+            id="user_Id"
+            type="email"
+            value=""
+            class="input outline-none"
+            maxlength="6"
+            placeholder="Enter Username"
           />
-          <span class="label-text">Remember me</span>
-        </label>
+          <label for="Username" class="text-[#4A00FF] text-[14px]"
+            >Defalut:adimn</label
+          >
 
-        <button id="login-btn" class="btn btn-neutral mt-4">Sign In</button>
-      </fieldset>
-    </div>
-    <span>or</span>
-    <div class="credentials">
-      <label for="Demo Credentials">Demo Credentials:</label>
+          <label class="label label text-[16px] pt-4 font-medium text-[#1F2937]"
+            >Password</label
+          >
+          <input
+            id="user_password"
+            type="password"
+            value=""
+            class="input outline-none"
+            maxlength="9"
+            placeholder="Enter Password"
+          />
+          <label for="password" class="text-[#4A00FF] text-[14px]"
+            >Defalut:adimn123</label
+          >
+          <label class="flex items-center gap-2 mt-2 cursor-pointer">
+            <input
+              type="checkbox"
+              id="remember-me"
+              class="checkbox checkbox-sm inline-block"
+            />
+            <span
+              class="label-text text-[16px] font-medium inline-block text-[#1F2937]"
+            >
+              Remember me</span
+            >
+          </label>
 
-      <h2>Username: admin</h2>
-      <p>Password: admin123</p>
-    </div>
+          <button id="login-btn" class="btn btn-primary mt-4">Sign In</button>
+        </fieldset>
+      </div>
+      <span>or</span>
+      <div class="credentials flex flex-col items-center justify-center">
+        <label
+          for="Demo Credentials "
+          class="text-[18px] font-medium inline-block text-[#1F2937]"
+          >Demo Credentials:</label
+        >
+
+        <h2 class="text-[16px] font-normal inline-block text-gray-600">
+          Username: admin
+        </h2>
+        <p class="text-[16px] font-normal inline-block text-gray-600">
+          Password: admin123
+        </p>
+      </div>
+    </main>
+    <!-- Modal  -->
     <dialog id="my_modal_3" class="modal">
       <div class="modal-box">
         <form method="dialog">
