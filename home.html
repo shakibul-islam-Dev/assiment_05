@@ -35,97 +35,65 @@
     <title>GitHub Issues Tracker</title>
   </head>
   <body>
-     
-    <nav class="mx-auto px-4 py-2 flex flex-col gap-4 sm:flex-row items-center justify-between">
-      <div id="nav-menu" class="hidden">eeeeeeeeeeeeee</div>
-      <div id="nav-start" class="flex items-center gap-4">
-        <img class="w-10" src="./assets/github-logo.png" alt="" />
-        <h1 class="text-2xl font-bold">GitHub Issues Tracker</h1>
-      </div>
+  <nav class="container mx-auto px-4 py-4 flex flex-col gap-4 sm:flex-row items-center justify-between">
+    <div id="nav-start" class="flex items-center gap-4">
+      <img class="w-10" src="./assets/github-logo.png" alt="Logo" />
+      <h1 class="text-2xl font-bold">GitHub Issues Tracker</h1>
+    </div>
 
-      <div id="nav-end" class="flex items-center justify-center">
-        <div id="search-parent">
-            <label class="input outline-none border-1">
-              <input type="text"  placeholder="search issues" required />
-            </label>
-           
-          </div>
-          <button id="search-btn" class="btn btn-primary">Search</button>
+    <div id="nav-end" class="flex items-center gap-2">
+      <div id="search-parent">
+        <label class="input input-bordered flex items-center gap-2">
+          <input type="text" id="search-input" class="grow outline-none border-none" placeholder="search issues" required />
+        </label>
+      </div>
+      <button id="search-btn" class="btn btn-primary">Search</button>
+    </div>
+  </nav>
+
+  <section id="toggle-section" class="container mx-auto px-4 pt-10 flex flex-wrap items-center justify-between gap-4">
+    <div class="toggle-btns text-[16px] font-semibold flex gap-2">
+      <button id="all" onclick="toggle('all')" class="btn bg-blue-700 text-white hover:bg-blue-800">All</button>
+      <button id="open" onclick="toggle('open')" class="btn">Open</button>
+      <button id="closed" onclick="toggle('closed')" class="btn">Closed</button>
+    </div>
+  </section>
+
+  <section class="container mx-auto px-4 pt-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div class="issue flex items-start flex-col">
+      <div class="flex items-center gap-2">
+        <img src="./assets/Aperture.png" alt="Aperture icon" />
+        <div class="text-2xl font-semibold">
+          <span id="issue" class="px-1">0</span> issues
         </div>
       </div>
-    </nav>
-    <section id="toggle" class="container mx-auto pt-10">
-      <div class="toggle-btns text-[16px] font-semibold">
-        <button
-          id="all"
-          onclick="toggle('all')"
-          class="btn bg-blue-700 text-white"
-        >
-          All
-        </button>
-        <button id="open" onclick="toggle('open')" class="btn">Open</button>
-        <button id="closed" onclick="toggle('closed')" class="btn">
-          Closed
-        </button>
+      <p class="text-base text-gray-400">Track and manage your project issues</p>
+    </div>
+    
+    <div class="flex items-center gap-6 text-xl font-bold">
+      <div class="flex items-center gap-2 text-green-600">
+        <i class="fa-solid fa-circle text-xs"></i><span>Open</span>
       </div>
-    </section>
-    <!-- Issues Items -->
-    <section
-      class="container mx-auto pt-10 flex flex-col sm:flex-row justify-between space-y-2"
-    >
-      <div class="issue px-2 flex items-start flex-col">
-        <div class="flex items-center">
-          <div><img src="./assets/Aperture.png" alt="Aperture" /></div>
-          <div class="text-2xl font-semibold">
-            <span id="issue" class="px-2"></span>issues
-          </div>
-        </div>
-        <p class="text-[16px] text-gray-400">
-          Track and manage your project issues
-        </p>
+      <div class="flex items-center gap-2 text-violet-600">
+        <i class="fa-solid fa-circle text-xs"></i><span>Closed</span>
       </div>
-      <div class="flex items-start gap-4 text-xl font-bold">
-        <div class="">
-          <span class="px-2 text-green-600"
-            ><i class="fa-solid fa-circle"></i></span
-          >Open
-        </div>
-        <div class="gap-1">
-          <span class="px-2 text-violet-600"
-            ><i class="fa-solid fa-circle"></i></span
-          >Closed
-        </div>
-      </div>
-    </section>
-    <section class="mt-4 py-10 border-t-1 border-t-gray-200 container mx-auto p-4">
-  
-  <div class="flex justify-center mb-4">
-      <span id="spiner" class="loading loading-dots loading-xl hidden"></span>
+    </div>
+  </section>
+
+  <div class="flex justify-center my-10">
+    <span id="spiner" class="loading loading-dots loading-lg hidden"></span>
   </div>
 
-  <div id="cards" class="cards grid grid-cols-1 sm:grid-cols-4 gap-4"></div>
-</section>
-    <!-- Cards Div -->
-    <section
-      class="mt-4 py-10 border-t-1 border-t-gray-200 container mx-auto p-4"
-    >
-      <div id="cards" class="cards grid grid-cols-1 sm:grid-cols-4 gap-4"></div>
+  <section id="cards" class="container mx-auto px-4 pb-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
     </section>
-    <!-- filter div -->
-    <section
-      class="mt-4 py-10 border-t-1 border-t-gray-200 container mx-auto p-4"
-    >
-      <div
-        id="filter-container"
-        class="grid grid-cols-1 sm:grid-cols-4 gap-4"
-      ></div>
-    </section>
-    <!-- Modal -->
-    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+
+  <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+    <div class="modal-box p-0 w-11/12 mx-auto max-w-2xl overflow-x-hidden">
       <div id="modal_container"></div>
-    </dialog>
-    <script src="./app.js" defer></script>
-    <script src="./loging.js" defer></script>
-    <!-- <script src="./demo.js"></script> -->
-  </body>
+    </div>
+  </dialog>
+
+  <script src="./app.js" defer></script>
+  <script src="./loging.js" defer></script>
+</body>
 </html>
